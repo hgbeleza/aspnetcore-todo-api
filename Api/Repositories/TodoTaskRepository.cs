@@ -14,6 +14,12 @@ namespace Api.Repositories
             _context = context;
         }
 
+        public async Task<TodoTask> GetItemById(int id)
+        {
+            var result = await _context.TodoTasks.SingleOrDefaultAsync(t => t.Id == id);
+            return result;
+        }
+
         public async Task<IEnumerable<TodoTask>> GetItems()
         {
             var result = await _context.TodoTasks.ToListAsync();

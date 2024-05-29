@@ -22,5 +22,12 @@ namespace Api.Controllers
             var result = await _todoTaskRepository.GetItems();
             return Ok(result);
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<TodoTask>> GetItemById(int id)
+        {
+            var result = await _todoTaskRepository.GetItemById(id);
+            return result;
+        }
     }
 }
