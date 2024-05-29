@@ -1,4 +1,5 @@
 ﻿using Api.Data;
+using Api.Data.Dtos;
 using Api.Entities;
 using Api.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,20 @@ namespace Api.Repositories
         public TodoTaskRepository(DatabaseConnectionContext context)
         {
             _context = context;
+        }
+
+        public async Task<TodoTask> AddItem(TaskToAddDto taskToAddDto)
+        {
+            var todoTask = new TodoTask
+            {
+                Name = taskToAddDto.Name,
+                Done = taskToAddDto.Done,
+            };
+
+            await _context.TodoTasks.AddAsync(todoTask);
+            await _context.SaveChangesAsync();
+
+            return todoTask;
         }
 
         public async Task<TodoTask> GetItemById(int id)

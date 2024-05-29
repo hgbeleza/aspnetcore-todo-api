@@ -1,4 +1,5 @@
-﻿using Api.Entities;
+﻿using Api.Data.Dtos;
+using Api.Entities;
 using Api.Repositories.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,13 @@ namespace Api.Controllers
         public TodoTaskController(ITodoTaskRepository todoTaskRepository)
         {
             _todoTaskRepository = todoTaskRepository;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<TodoTask>> AddItem(TaskToAddDto taskToAddDto)
+        {
+            var newTask = await _todoTaskRepository.AddItem(taskToAddDto);
+            return newTask;
         }
 
         [HttpGet]

@@ -1,4 +1,5 @@
-﻿using Api.Entities;
+﻿using Api.Data.Dtos;
+using Api.Entities;
 
 namespace Api.Repositories.Contracts
 {
@@ -6,5 +7,6 @@ namespace Api.Repositories.Contracts
     {
         Task<IEnumerable<TodoTask>> GetItems();
         Task<TodoTask> GetItemById(int id);
+        Task<TodoTask> AddItem(TaskToAddDto taskToAddDto);
     }
 }
