@@ -1,4 +1,6 @@
 using Api.Data;
+using Api.Repositories;
+using Api.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,8 @@ builder.Services.AddDbContext<DatabaseConnectionContext>(options =>
     var connectString = builder.Configuration.GetConnectionString("ConnectionContext");
     options.UseMySql(connectString, ServerVersion.AutoDetect(connectString));
 });
+
+builder.Services.AddScoped<ITodoTaskRepository, TodoTaskRepository>();
 
 var app = builder.Build();
 
